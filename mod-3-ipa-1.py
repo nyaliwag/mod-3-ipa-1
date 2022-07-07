@@ -53,8 +53,14 @@ def caesar_cipher(message, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    for x in message:
-        print((((chr((((ord((x))-65+shift)%26)+65))))),end="")
+    for ch in message:
+        if ch.isalpha():
+            stayInAlphabet = ord(ch) + shift 
+        if stayInAlphabet > ord('z'):
+            stayInAlphabet -= 26
+        finalLetter = chr(stayInAlphabet)
+        cipherText += finalLetter
+    return cipherText
 
 def shift_by_letter(letter, letter_shift):
     '''Shift By Letter. 
@@ -81,9 +87,10 @@ def shift_by_letter(letter, letter_shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
+    shift = ord(letter_shift)
     if letter == ' ':
         return(' ')
-    else: return(chr((((ord(letter)-65+(ord(letter_shift)-64))%26)+65))) 
+    else: return(chr((((ord(letter)-65+(ord(letter_shift)-65))%26)+65))) 
 
 def vigenere_cipher(message, key):
     '''Vigenere Cipher. 
@@ -180,11 +187,11 @@ def scytale_cipher(message, shift):
         message += "_"
         if len(message)%shift == 0:
             break
-        
+    cipher=""    
     for i in range(len(message)):
-        cipher = message[((i // shift) + (len(message) // shift) * (i % shift))]
-        for j in cipher:
-            print(j, end="")
+        newmsg = message[((i // shift) + (len(message) // shift) * (i % shift))]
+        cipher+=newmsg
+    return cipher
 
 def scytale_decipher(message, shift):
     '''Scytale De-cipher.
@@ -213,8 +220,9 @@ def scytale_decipher(message, shift):
         message += "_"
         if len(message)%shift == 0:
             break
-            
-    for i in range(len(message)):
-        decipher = message[(int(i * shift) + int((len(message) * shift)) // (i % shift))]
-        for j in decipher:
-            print(j, end="")
+    decipher=""       
+    for i in range(0,len(message)):
+        horizontal = len(message)//shift
+        position = (i//horizontal)+shift*(i%horizontal)
+        decipher+=message[position]
+    return decipher
