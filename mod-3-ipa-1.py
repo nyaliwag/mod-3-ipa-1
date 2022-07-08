@@ -53,6 +53,7 @@ def caesar_cipher(message, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
+    cipherText=""
     for ch in message:
         if ch.isalpha():
             stayInAlphabet = ord(ch) + shift 
