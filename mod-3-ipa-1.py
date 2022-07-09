@@ -53,14 +53,13 @@ def caesar_cipher(message, shift):
     '''
     # Replace `pass` with your code. 
     # Stay within the function. Only use the parameters as input. The function should return your answer.
-    cipherText=""
+    cipherText = ""
     for ch in message:
         if ch.isalpha():
-            stayInAlphabet = ord(ch) + shift 
-        if stayInAlphabet > ord('z'):
-            stayInAlphabet -= 26
-        finalLetter = chr(stayInAlphabet)
-        cipherText += finalLetter
+            final_letter=(chr((((ord(ch)-65+shift)%26)+65)))
+            cipherText+= final_letter
+        else: 
+            cipherText+=ch      
     return cipherText
 
 def shift_by_letter(letter, letter_shift):
